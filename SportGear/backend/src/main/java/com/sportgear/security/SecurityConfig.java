@@ -24,6 +24,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    private static final String DEFAULT_FRONTEND_ORIGIN = "http://localhost:5173";
+    private static final List<String> ALLOWED_METHODS =
+        List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS");
+    private static final List<String> ALLOWED_HEADERS =
+        List.of("Authorization", "Content-Type");
+
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final SecurityProperties securityProperties;
 
@@ -74,8 +80,8 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(parseOrigins(securityProperties.getCors().getAllowedOrigins()));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        config.setAllowedMethods(ALLOWED_METHODS);
+        config.setAllowedHeaders(ALLOWED_HEADERS);
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -85,7 +91,7 @@ public class SecurityConfig {
 
     private List<String> parseOrigins(String value) {
         if (value == null || value.isBlank()) {
-            return List.of("http://localhost:5173");
+            return List.of(DEFAULT_FRONTEND_ORIGIN);
         }
 
         return Arrays.stream(value.split(","))
