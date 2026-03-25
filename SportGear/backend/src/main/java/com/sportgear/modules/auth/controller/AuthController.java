@@ -48,6 +48,6 @@ public class AuthController {
     public ResponseEntity<ApiMessageResponse> resetPassword(
         @Valid @RequestBody ResetPasswordRequest request
     ) {
-        return ResponseEntity.ok(passwordResetService.resetPassword(request));
+        return ResponseEntity.ok(passwordResetService.resetPassword(request)); // Returns success message if reset is successful
     }
 }
