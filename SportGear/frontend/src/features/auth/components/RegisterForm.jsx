@@ -12,6 +12,12 @@ const initialForm = {
 function RegisterForm({ onSubmit, loading, status }) {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
+  const statusPrefix =
+    status?.type === "success"
+      ? "Đăng ký thành công: "
+      : status?.type === "error"
+        ? "Đăng ký thất bại: "
+        : "";
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -34,7 +40,7 @@ function RegisterForm({ onSubmit, loading, status }) {
   return (
     <form className="form-grid" onSubmit={handleSubmit} noValidate>
       {status?.message ? (
-        <div className={`status-text ${status.type}`}>{status.message}</div>
+        <div className={`status-text ${status.type}`}>{`${statusPrefix}${status.message}`}</div>
       ) : null}
 
       <div>
