@@ -32,7 +32,7 @@ public class User {
     @Column(length = 30)
     private String phone;
 
-    @Column(length = 300)
+    @Column(length = 512)
     private String avatarUrl;
 
     @Column(nullable = false)
