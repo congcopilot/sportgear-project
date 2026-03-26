@@ -27,4 +27,16 @@ describe("validateRegister", () => {
 
     expect(Object.keys(result)).toHaveLength(0);
   });
+
+  it("accepts valid payload without phone", () => {
+    const result = validateRegister({
+      fullName: "Sport User",
+      email: "user@sportgear.vn",
+      password: "StrongPass1",
+      confirmPassword: "StrongPass1",
+      phone: ""
+    });
+
+    expect(Object.keys(result)).toHaveLength(0);
+  });
 });
