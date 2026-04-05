@@ -4,6 +4,7 @@ import LoginPage from "../../features/auth/pages/LoginPage";
 import ForgotPasswordPage from "../../features/auth/pages/ForgotPasswordPage";
 import ResetPasswordPage from "../../features/auth/pages/ResetPasswordPage";
 import ProfilePage from "../../features/auth/pages/ProfilePage";
+import CheckoutPage from "../../features/checkout/pages/CheckoutPage";
 import { useAuth } from "../../features/auth/hooks/useAuth";
 
 function PrivateRoute({ children }) {
@@ -27,6 +28,14 @@ function AppRouter() {
         element={
           <PrivateRoute>
             <ProfilePage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/checkout"
+        element={
+          <PrivateRoute>
+            <CheckoutPage />
           </PrivateRoute>
         }
       />
